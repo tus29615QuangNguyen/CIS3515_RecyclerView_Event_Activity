@@ -6,15 +6,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-// TODO(Step 1: Implement click behavior)
 
-// TODO (Step 1a: Accept lambda in constructor)
-class NumberDisplayAdapter (private val numbers: Array<Int>) : RecyclerView.Adapter<NumberDisplayAdapter.NumberViewHolder>() {
+class NumberDisplayAdapter (private val numbers: Array<Int>, _callBack: (Float)->Unit) : RecyclerView.Adapter<NumberDisplayAdapter.NumberViewHolder>() {
 
-    // TODO (Step 1b: Invoke lambda via onClickListener)
+    private val callBack = _callBack
     inner class NumberViewHolder (layout: View) : RecyclerView.ViewHolder (layout) {
         // enumerate views inside layout
         val textView = layout.findViewById<TextView>(R.id.textView)
+        init {
+            textView.setOnClickListener{callBack(numbers[adapterPosition].toFloat())}
+        }
 
     }
 
